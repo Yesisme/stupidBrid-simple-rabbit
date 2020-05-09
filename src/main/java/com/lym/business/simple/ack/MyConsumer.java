@@ -31,7 +31,7 @@ public class MyConsumer extends DefaultConsumer {
         }
 
         if((Integer) properties.getHeaders().get("ack")==0){
-            //requeue:表示重回队列生产端会重新投递，false表示不会回队列
+            //requeue:true表示重回broker队列会重新投递，false表示不会回队列
             channel.basicNack(envelope.getDeliveryTag(),false,true);
         }else{
             channel.basicAck(envelope.getDeliveryTag(),false);

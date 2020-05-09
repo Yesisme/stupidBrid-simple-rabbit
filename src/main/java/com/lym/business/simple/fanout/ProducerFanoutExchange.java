@@ -1,6 +1,6 @@
 package com.lym.business.simple.fanout;
 
-import com.lym.business.simple.config.RabbitMqConfig;
+import com.lym.business.simple.config.RabbitMqProcuderConfig;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -8,7 +8,7 @@ import com.rabbitmq.client.ConnectionFactory;
 public class ProducerFanoutExchange {
 
     public static void main(String[] args) throws Exception {
-        ConnectionFactory factory = RabbitMqConfig.connectionFactory();
+        ConnectionFactory factory = RabbitMqProcuderConfig.connectionFactory();
 
         Connection connection = factory.newConnection();
 

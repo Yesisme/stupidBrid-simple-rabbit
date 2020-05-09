@@ -1,6 +1,6 @@
-package com.lym.business.simple.fanout;
+package com.lym.business.simple.topic;
 
-import com.lym.business.simple.config.RabbitMqProcuderConfig;
+import com.lym.business.simple.config.RabbitMqConsumerConfig;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -8,28 +8,27 @@ import com.rabbitmq.client.QueueingConsumer;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ConsumerFanoutExchage {
+public class ConsumerTopicExchange2 {
 
-    public static void main(String[] args) throws Exception{
-        ConnectionFactory factory = RabbitMqProcuderConfig.connectionFactory();
+    public static void main(String[] args) throws Exception {
+
+        ConnectionFactory factory = RabbitMqConsumerConfig.connectionFactory();
 
         Connection connection = factory.newConnection();
 
         Channel channel = connection.createChannel();
 
-        String exchanName = "test_fanout_exchange";
+        String exchangeName ="test_topic_exchange";
 
-        String exchangeType="fanout";
+        String exchangeType ="topic";
 
-        String queueName = "test_fanout_queue";
+        String queueName ="test_topic_queue";
 
-        String routingKey="";//不设置routingkey
-
-        channel.exchangeDeclare(exchanName,exchangeType,true,false,null);
-
+        String routingKey = "user.#";
+        channel.exchangeDeclare(exchangeName,exchangeType,true,false,null);
         channel.queueDeclare(queueName,false,false,false,null);
+        channel.queueBind(queueName,exchangeName,routingKey);
 
-        channel.queueBind(queueName,exchanName,"");
         QueueingConsumer consumer = new QueueingConsumer(channel);
 
         channel.basicConsume(queueName,true,consumer);
@@ -37,7 +36,7 @@ public class ConsumerFanoutExchage {
         while (true){
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
             String msg = new String(delivery.getBody());
-            log.info("消费者收到消息\t{}",msg);
+            log.info("消费者接收到消息\t{}",msg);
         }
     }
 }

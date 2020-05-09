@@ -1,6 +1,7 @@
 package com.lym.business.simple.returnListener;
 
-import com.lym.business.simple.config.RabbitMqConfig;
+import com.lym.business.simple.config.RabbitMqConsumerConfig;
+import com.lym.business.simple.config.RabbitMqProcuderConfig;
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,7 +10,7 @@ public class Consumer {
     public static void main(String[] args) throws Exception{
 
 
-        ConnectionFactory factory = RabbitMqConfig.connectionFactory();
+        ConnectionFactory factory = RabbitMqConsumerConfig.connectionFactory();
 
         Connection connection = factory.newConnection();
 

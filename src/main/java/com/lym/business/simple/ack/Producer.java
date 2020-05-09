@@ -1,6 +1,6 @@
 package com.lym.business.simple.ack;
 
-import com.lym.business.simple.config.RabbitMqConfig;
+import com.lym.business.simple.config.RabbitMqProcuderConfig;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -12,7 +12,7 @@ import java.util.Map;
 public class Producer {
 
     public static void main(String[] args) throws Exception{
-        ConnectionFactory factory = RabbitMqConfig.connectionFactory();
+        ConnectionFactory factory = RabbitMqProcuderConfig.connectionFactory();
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 

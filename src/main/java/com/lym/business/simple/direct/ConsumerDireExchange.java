@@ -1,6 +1,6 @@
 package com.lym.business.simple.direct;
 
-import com.lym.business.simple.config.RabbitMqConfig;
+import com.lym.business.simple.config.RabbitMqProcuderConfig;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -12,7 +12,7 @@ public class ConsumerDireExchange {
 
     public static void main(String[] args) throws Exception{
         //创建工厂
-        ConnectionFactory factory = RabbitMqConfig.connectionFactory();
+        ConnectionFactory factory = RabbitMqProcuderConfig.connectionFactory();
 
         //创建连接
         Connection connection = factory.newConnection();

@@ -1,6 +1,6 @@
 package com.lym.business.simple.confirmListener;
 
-import com.lym.business.simple.config.RabbitMqConfig;
+import com.lym.business.simple.config.RabbitMqProcuderConfig;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.ConfirmListener;
 import com.rabbitmq.client.Connection;
@@ -15,7 +15,7 @@ public class Producer {
 
     public static void main(String[] args) throws Exception{
 
-        ConnectionFactory factory = RabbitMqConfig.connectionFactory();
+        ConnectionFactory factory = RabbitMqProcuderConfig.connectionFactory();
 
         Connection connection = factory.newConnection();
 
@@ -37,13 +37,13 @@ public class Producer {
             //成功进入
             @Override
             public void handleAck(long deliveryTag, boolean multiple) throws IOException {
-                log.info("消息投递成功{}","----no ack--------");
+                log.info("消息投递成功{}","----ack--------");
             }
 
-            //失败进入，deliveryTag表示唯一标识
+            //失败进入，deliveryTag表示唯一标识,磁盘满了,网络原因。
             @Override
             public void handleNack(long deliveryTag, boolean multiple) throws IOException {
-                log.info("消息投递失败{}","----ack--------");
+                log.info("消息投递失败{}","----no ack--------");
             }
         });
 

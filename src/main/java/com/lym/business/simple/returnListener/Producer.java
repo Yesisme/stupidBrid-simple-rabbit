@@ -1,6 +1,6 @@
 package com.lym.business.simple.returnListener;
 
-import com.lym.business.simple.config.RabbitMqConfig;
+import com.lym.business.simple.config.RabbitMqProcuderConfig;
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,11 +9,11 @@ import java.io.IOException;
 public class Producer {
 
     public static void main(String[] args) throws Exception{
-        ConnectionFactory factory = RabbitMqConfig.connectionFactory();
+        ConnectionFactory factory = RabbitMqProcuderConfig.connectionFactory();
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
         String exchangeName="test_return_exchange";
-        String routingKey ="return.save";
+        String routingKey ="return1.save";
         String routingkeyError = "test.error";
 
         //如果消息不可达，设置mandator=true会进入此方法
@@ -39,7 +39,7 @@ public class Producer {
 
         String msg = "hello return listener!";
         //设置mandator=true会进入addReturnListener方法
-        //channel.basicPublish(exchangeName,routingKey,true,null,msg.getBytes());
-        channel.basicPublish(exchangeName,routingkeyError,false,null,msg.getBytes());
+        channel.basicPublish(exchangeName,routingKey,true,null,msg.getBytes());
+        //channel.basicPublish(exchangeName,routingkeyError,false,null,msg.getBytes());
     }
 }

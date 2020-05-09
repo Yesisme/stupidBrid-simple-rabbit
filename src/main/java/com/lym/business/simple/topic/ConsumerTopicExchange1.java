@@ -1,6 +1,7 @@
 package com.lym.business.simple.topic;
 
-import com.lym.business.simple.config.RabbitMqConfig;
+import com.lym.business.simple.config.RabbitMqConsumerConfig;
+import com.lym.business.simple.config.RabbitMqProcuderConfig;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -8,11 +9,11 @@ import com.rabbitmq.client.QueueingConsumer;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ConsumerTopicExchange {
+public class ConsumerTopicExchange1 {
 
     public static void main(String[] args) throws Exception {
 
-        ConnectionFactory factory = RabbitMqConfig.connectionFactory();
+        ConnectionFactory factory = RabbitMqConsumerConfig.connectionFactory();
 
         Connection connection = factory.newConnection();
 
